@@ -17,6 +17,13 @@ app.get("/", function (request, response) {
   response.send("Neill's Quote Server!  Ask me for /quotes/random, or /quotes");
 });
 
+app.get("/quotes", function (request, response){
+  response.send(quotes);
+});
+
+app.get("/quotes/random", function(request, response){
+   response.send(pickFromArray(quotes));
+})
 //START OF YOUR CODE...
 
 //...END OF YOUR CODE
@@ -25,8 +32,11 @@ app.get("/", function (request, response) {
 //example: pickFromArray([1,2,3,4]), or
 //example: pickFromArray(myContactsArray)
 //
-function pickFromArray(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+function pickFromArray(quotes) {
+  const randomNumber = Math.random()
+  const totalNUmberOfQuotes = quotes.length;
+  const randomIndex = Math.floor(randomNumber * totalNUmberOfQuotes)
+  return quotes[randomIndex];
 }
 
 //Start our server so that it listens for HTTP requests!
